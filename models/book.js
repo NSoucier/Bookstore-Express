@@ -62,7 +62,6 @@ class Book {
    * */
 
   static async create(data) {
-    console.log('inside hereeeeeeeeeeeeeee:', data)
     const result = await db.query(
       `INSERT INTO books (
             isbn,
@@ -93,7 +92,6 @@ class Book {
         data.year
       ]
     );
-    console.log('after inside hereeeeeeeeeeee')
     return result.rows[0];
   }
 

@@ -32,16 +32,13 @@ router.get("/:isbn", async function (req, res, next) {
 /** POST /   bookData => {book: newBook}  */
 
 router.post("/", async function (req, res, next) {
-  console.log('hereeeeeeeeeeeeeeeee', req.body)
   try {
     const validate = jsonSchema.validate(req.body, bookSchema);
     if (!validate.valid) {
       const errors = validate.errors.map(e => e.stack);
       throw new ExpressError(errors, 400);
     }
-    console.log('here tooooooooooooooo', req.body.book)
     const book = await Book.create(req.body.book);
-    console.log('over herreeeeeeeeeeeeee')
     return res.status(201).json({ book });
   } catch (err) {
     return next(err);
